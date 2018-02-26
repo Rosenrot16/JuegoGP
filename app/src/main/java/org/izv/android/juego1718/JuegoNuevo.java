@@ -1,5 +1,10 @@
 package org.izv.android.juego1718;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.widget.Toast;
+
 import org.izv.android.juego1718.currentgame.Assets;
 import org.izv.android.juego1718.currentgame.Background;
 import org.izv.android.juego1718.currentgame.BouncingBall;
@@ -13,7 +18,7 @@ import org.izv.android.juego1718.generic.GenericGameActivity;
 
 public class JuegoNuevo extends GenericGameActivity {
 
-    private  BouncingBall b1;
+    private  BouncingBall b1, b2;
     private Tipejo t;
 
     @Override
@@ -21,11 +26,11 @@ public class JuegoNuevo extends GenericGameActivity {
         addGameObject(new Fondo());
         b1 = new BouncingBall();
         addGameObject(b1);
-        //b2 = new BouncingBall();
-        //b2.setSpeedX(10);
-        //b2.setSpeedY(10);
-        //b2.setX(300);
-        //addGameObject(b2);
+        b2 = new BouncingBall();
+        b2.setSpeedX(-30);
+        b2.setX(2000);
+        b2.setY(300);
+        addGameObject(b2);
         t = new Tipejo();
         addGameObject(t);
     }
@@ -59,14 +64,16 @@ public class JuegoNuevo extends GenericGameActivity {
         }*/
 
         chocaPelota(t, b1);
-        //chocaPelota(t, b2);
+        chocaPelota(t, b2);
     }
 
     private boolean chocaPelota(Tipejo t, BouncingBall b){
 
         boolean chocan = t.instersects(b);
         if(chocan){
-            t.setImage(Assets.ducking);
+            Intent intent = new Intent(JuegoNuevo.this, GameOver.class);
+            startActivity(intent);
+            /*t.setImage(Assets.ducking);
             if(t.getX() > b.getX()){
                 b.setSpeedX(+3);
             }else{
@@ -76,9 +83,11 @@ public class JuegoNuevo extends GenericGameActivity {
                 b.setSpeedY(+3);
             }else{
                 b.setSpeedY(+3);
-            }
+            }*/
         }
 
         return true;
     }
+
+
 }

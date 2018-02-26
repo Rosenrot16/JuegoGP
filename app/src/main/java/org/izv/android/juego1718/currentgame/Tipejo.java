@@ -9,7 +9,7 @@ import org.izv.android.juego1718.media.Animation;
 
 public class Tipejo extends GameObject{
 
-    private static final int MAXSALTO = 15;
+    private static final int MAXSALTO = 12;
 
     private Animation animation;
     private Long tiempo;
@@ -17,13 +17,13 @@ public class Tipejo extends GameObject{
     private int salto = 0;
 
     public Tipejo() {
-        super(Assets.stand);
+        super(Assets.tipo1);
         this.setX(5);
-        this.setY(255);
+        this.setY(200);
 
         animation = new Animation();
-        animation.addFrame(Assets.stand, 350);
-        animation.addFrame(Assets.right, 350);
+        animation.addFrame(Assets.tipo1, 350);
+        animation.addFrame(Assets.tipo2, 350);
         tiempo = System.currentTimeMillis();
     }
 
@@ -37,8 +37,8 @@ public class Tipejo extends GameObject{
                 setSpeedY(salto);
                 saltando = true;
             }
-        } else if (getTouchHandler().isMoving() && getTouchHandler().isMovingRight()){
-            this.setSpeedX(2);
+        //} //else if (getTouchHandler().isMoving() && getTouchHandler().isMovingRight()){
+            //this.setSpeedX(2);
         } else {
             animation.update((System.currentTimeMillis() - tiempo));
             tiempo = System.currentTimeMillis();
@@ -48,13 +48,14 @@ public class Tipejo extends GameObject{
 
         if (saltando){
             setY(getY() + getSpeedY());
-            setX(getX() + 2);
-            this.setImage(Assets.jump);
+            setX(getX());
+            this.setImage(Assets.tiposalto);
             setSpeedY(getSpeedY() + 1);
             salto++;
             if(salto > MAXSALTO){
                 saltando = false;
                 setSpeedY(0);
+                //setY(200);
             }
 
         }

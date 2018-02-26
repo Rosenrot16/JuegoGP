@@ -6,19 +6,13 @@ import java.util.Random;
 
 public class BouncingBall extends GameObject {
 
-    private int backgroundX;
 
     public BouncingBall() {
-        super(Assets.ball);
+        super(Assets.valla);
         this.setSpeedX(-30);
-        this.setX(800);
-        this.setY(getWidth());
+        this.setX(1000);
+        this.setY(300);
 
-        //this.setSpeedY(-3);
-    }
-
-    private int getBackgroundX() {
-        return this.backgroundX;
     }
 
     public void update() {
