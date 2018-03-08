@@ -29,16 +29,16 @@ public class Tipejo extends GameObject{
 
     @Override
     public void update() {
-        if (getTouchHandler().isMoving() && getTouchHandler().isMovingUp()){
-//            this.setImage(Assets.jump);
+
+        if(getTouchHandler().isTouched){
+            this.setImage(Assets.stand);
             this.setSpeedX(0);
             if(!saltando){
                 salto = -MAXSALTO;
                 setSpeedY(salto);
                 saltando = true;
             }
-        //} //else if (getTouchHandler().isMoving() && getTouchHandler().isMovingRight()){
-            //this.setSpeedX(2);
+
         } else {
             animation.update((System.currentTimeMillis() - tiempo));
             tiempo = System.currentTimeMillis();

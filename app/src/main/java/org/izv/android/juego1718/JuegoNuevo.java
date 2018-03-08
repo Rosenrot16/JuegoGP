@@ -12,6 +12,8 @@ import org.izv.android.juego1718.currentgame.Fondo;
 import org.izv.android.juego1718.currentgame.Tipejo;
 import org.izv.android.juego1718.generic.GenericGameActivity;
 
+import java.util.Random;
+
 /**
  * Created by dam on 14/02/2018.
  */
@@ -23,14 +25,14 @@ public class JuegoNuevo extends GenericGameActivity {
 
     @Override
     public void start() {
+
         addGameObject(new Fondo());
+
         b1 = new BouncingBall();
+        b1.setX(this.getGraphics().getWidth() - b1.getWidth());
+        b1.setY(this.getGraphics().getHeight() - b1.getHeight());
         addGameObject(b1);
-        b2 = new BouncingBall();
-        b2.setSpeedX(-30);
-        b2.setX(2000);
-        b2.setY(300);
-        addGameObject(b2);
+
         t = new Tipejo();
         addGameObject(t);
     }
@@ -38,33 +40,8 @@ public class JuegoNuevo extends GenericGameActivity {
     @Override
     public void update() {
         super.update();
-        /*boolean chocan = b1.instersects(b2);
-
-        if(chocan){
-
-            if(b1. getX() > b2.getX()){
-                b1.setSpeedX(+3);
-                b2.setSpeedX(-(+3));
-            }else{
-                b1.setSpeedX(-(+3));
-                b2.setSpeedX(+3);
-            }
-            if(b1. getY() > b2.getY()){
-                b1.setSpeedY(+3);
-                b2.setSpeedY(-(+3));
-            }else{
-                b1.setSpeedY(-(+3));
-                b2.setSpeedY(+3);
-            }
-//            b1.setSpeedY(0);
-//            b1.setSpeedX(0);
-//
-//            b2.setSpeedY(0);
-//            b2.setSpeedX(0);
-        }*/
 
         chocaPelota(t, b1);
-        chocaPelota(t, b2);
     }
 
     private boolean chocaPelota(Tipejo t, BouncingBall b){
@@ -73,17 +50,18 @@ public class JuegoNuevo extends GenericGameActivity {
         if(chocan){
             Intent intent = new Intent(JuegoNuevo.this, GameOver.class);
             startActivity(intent);
-            /*t.setImage(Assets.ducking);
-            if(t.getX() > b.getX()){
-                b.setSpeedX(+3);
-            }else{
-                b.setSpeedX(+3);
+        }
+        else {
+            if(b1.getX() < 2*(- b1.getWidth())){
+                Random r = new Random();
+                //Entre el 30 y 50. 30 inclusive
+                int speed = -(r.nextInt(50 - 30) + 30);
+                b1 = new BouncingBall();
+                b1.setSpeedX(speed);
+                b1.setX(this.getGraphics().getWidth() - b1.getWidth());
+                b1.setY(this.getGraphics().getHeight() - b1.getHeight());
+                addGameObject(b1);
             }
-            if(t. getY() > b.getY()){
-                b.setSpeedY(+3);
-            }else{
-                b.setSpeedY(+3);
-            }*/
         }
 
         return true;

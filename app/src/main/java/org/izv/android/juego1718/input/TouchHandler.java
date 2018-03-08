@@ -6,7 +6,7 @@ import android.view.View;
 
 public class TouchHandler implements View.OnTouchListener {
 
-    boolean isMoving, isMovingRight, isMovingUp, isTouched, isVertical;
+    public boolean isMoving, isMovingRight, isMovingUp, isTouched, isVertical;
     float scaleX, scaleY;
     int touchX, touchY;
 
